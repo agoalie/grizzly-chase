@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1 {
+            color: lightgrey;
+            text-align: center;
+        }
+        #gameCanvas {
+            box-shadow: 10px 10px 15px black;
+        }
+        body {
+            display:flex;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(
+            0deg,
+            rgb(138, 16, 48) 90%,
+            rgb(0, 0, 0) 0%
+            );
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Donkey Kong</h1>
+    <canvas id="gameCanvas"> </canvas>
+</div>
+<script src="src/Game.js" type="module"></script>
+</body>
+</html>
