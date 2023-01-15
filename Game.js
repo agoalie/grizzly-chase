@@ -1,44 +1,60 @@
 canvas = document.getElementById("gameCanvas");
 ctx = canvas.getContext("2d");
-
 //Variables
 let animate = true;
 let screen = "menu";
+let score = 0;
 
-//Images
+//Images and sounds
 const gameMap = new Image(); //game map image
 gameMap.src = "images/gameMap.png";
 
 const bearIMG = new Image(); //bear image
 bearIMG.src = 'images/bear.png';
 
-const GrizzlyStart = new Image(); //start screen
-GrizzlyStart.src = "images/GrizzlyStart.png";
+const grizzlyStart = new Image(); //start screen
+grizzlyStart.src = "images/grizzlyStart.png";
 
-const LevelFailed = new Image(); //game over screen
-LevelFailed.src = "images/LevelFailed.png";
+const levelFailed = new Image(); //game over screen
+levelFailed.src = "images/levelFailed.jpeg";
 
-const LevelSuccessful = new Image(); //win screen
-LevelSuccessful.src = "images/LevelSuccessful.png";
+const levelSuccessful = new Image(); //win screen
+levelSuccessful.src = "images/levelSuccessful.jpeg";
 
-const Goodbye = new Image(); //goodbye screen
-Goodbye.src = "images/Goodbye.jpeg";
+const goodbye = new Image(); //goodbye screen
+goodbye.src = "images/goodbye.jpeg";
 
-//event listeners
-canvas.addEventListener("click", function (event) {  //start game on button click
-    if (screen === "menu") {
+const jump = new Audio("jump.wav");
+
+//functions
+function reset() {
+    //player
+    player.reset();
+
+    //enemy
+    enemies = [];
+    enemies.push(new Enemy());
+    score = 0;
+}
+
+//event listener for menus
+canvas.addEventListener("click", function (event) {  //start menu buttons
+    if (screen === "menu") { //menu
         if (event.offsetX > 170 && event.offsetX < 315 && event.offsetY > 343 && event.offsetY < 406) {
             screen = "game";
-        }
-    }
-});
-
-canvas.addEventListener("click", function (event) {  //Goodbye screen on button click
-    if (screen === "menu") {
-        if (event.offsetX > 184 && event.offsetX < 304 && event.offsetY > 435 && event.offsetY < 509) {
+        } else if (event.offsetX > 184 && event.offsetX < 304 && event.offsetY > 435 && event.offsetY < 509) {
             screen = "goodbye";
         }
     }
+    if (screen === "gameOver") { //loss screen
+        if (event.offsetX > 114 && event.offsetX < 331 && event.offsetY > 355 && event.offsetY < 432) {
+            screen = "game";
+            reset();
+        } else if (event.offsetX > 160 && event.offsetX < 280 && event.offsetY > 450 && event.offsetY < 520) {
+            screen = "goodbye";
+        }
+    }
+    console.log(event.offsetX, event.offsetY);
 });
 
 //Game Loop
@@ -46,43 +62,51 @@ function startGame() {
     if (animate === true) draw();
     requestAnimationFrame(startGame);
 }
+
 function draw() {
-    if(screen === "menu")
+    if (screen === "menu")
         drawMenu();
-    else if(screen === "game")
+    else if (screen === "game") {
         drawGame();
-    else if (screen === "gameOver")
+    } else if (screen === "gameOver")
         drawGameOver();
     else if (screen === "win")
         drawWin();
     else if (screen === "goodbye")
         drawGoodbye();
 }
+
 startGame();
 
 //draw screens functions
+function drawMenu() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(grizzlyStart, 0, 0, canvas.width, canvas.height);
+}
+
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(gameMap, 0, 0, canvas.width, canvas.height);
     ctx.drawImage(bearIMG, 340, 100, 80, 60);
-}
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 350, 20);
 
-function drawMenu() {
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.drawImage(GrizzlyStart, 0, 0, canvas.width, canvas.height);
+    player.update();
+    beeUpdater();
 }
 
 function drawGameOver() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(LevelFailed, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(levelFailed, 0, 0, canvas.width, canvas.height);
 }
 
 function drawWin() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(LevelSuccessful, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(levelSuccessful, 0, 0, canvas.width, canvas.height);
 }
 
 function drawGoodbye() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(Goodbye, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(goodbye, 0, 0, canvas.width, canvas.height);
 }
