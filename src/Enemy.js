@@ -63,8 +63,8 @@ class Enemy {
         let rect = {
             x: player.position.x,
             y: player.position.y,
-            w: player.width - 8,
-            h: player.height - 8
+            w: player.width,
+            h: player.height
         }
 
         var distX = Math.abs(circle.x - rect.x - rect.w / 2);

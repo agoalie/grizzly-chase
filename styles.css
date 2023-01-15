@@ -19,3 +19,10 @@ body {
     );
     overflow: hidden;
 }
+
+h2 {
+    color: lightgray;
+    text-align: center;
+    font-family: "Chalkduster";
+    font-size: 18px;
+}

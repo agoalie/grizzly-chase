@@ -43,7 +43,7 @@ function getCookie(highScore) {
     }
 }
 
-highscore = getCookie("highScore");
+highScore = getCookie("highScore");
 
 function reset() {
     //player
@@ -82,15 +82,19 @@ function startGame() {
 }
 
 function draw() {
-    if (screen === "menu")
+    if (screen === "menu") {
         drawMenu();
-    else if (screen === "game") {
+        document.getElementById("scoreBoard").innerHTML = "High score: " + highScore;
+        console.log(highScore);
+    } else if (screen === "game") {
         drawGame();
-    } else if (screen === "gameOver")
+    } else if (screen === "gameOver") {
         drawGameOver();
-    else if (screen === "win")
+        document.getElementById("scoreBoard").innerHTML = "High score: " + highScore;
+    } else if (screen === "win") {
         drawWin();
-    else if (screen === "goodbye")
+        document.getElementById("scoreBoard").innerHTML = "High score: " + highScore;
+    } else if (screen === "goodbye")
         drawGoodbye();
 }
 
