@@ -32,6 +32,8 @@ const button = new Audio("audio/button.wav");
 highScore = localStorage.getItem("highScore");
 
 //functions
+if(highScore === null) highScore = 0;
+
 function reset() {
     //player
     player.reset();
