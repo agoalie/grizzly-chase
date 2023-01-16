@@ -25,9 +25,9 @@ levelSuccessful.src = "images/levelSuccessful.jpeg";
 const goodbye = new Image(); //goodbye screen
 goodbye.src = "images/goodbye.jpeg";
 
-const jump = new Audio("jump.wav");
+const jump = new Audio("audio/jump.wav");
 
-const button = new Audio("button.wav");
+const button = new Audio("audio/button.wav");
 
 highScore = localStorage.getItem("highScore");
 
