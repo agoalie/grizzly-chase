@@ -14,9 +14,10 @@ const ladders = [
     [204, 237, 220, 313], //2nd from top (left) 76
     [295, 237, 311, 313], //2nd from top (right) 76
     [114, 159, 130, 235], //top 76
-    [163, 473, 179, 493], //broken ladders
+    [163, 470.2, 179, 493], //broken ladders
     [319, 382, 335, 403],
     [254, 207, 270, 232],
+    [252, 90, 268, 158] //win
 ];
 
 class Player {
@@ -109,6 +110,11 @@ class Player {
 
         this.collisions();
         this.gravity();
+
+        if (this.position.y + this.height < 98) {
+            freeze(2);
+            screen = "gameWon";
+        }
     }
 } //Player class
 
