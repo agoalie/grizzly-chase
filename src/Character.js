@@ -6,7 +6,7 @@ const platforms = [
     [405, 415, 362],
     [495, 505, 1000],
     [562, 572, 1000],
-    [91, 101, 1000]
+    [91, 101, 225]
 ];
 const ladders = [
     [273, 498, 289, 559], //bottom 61
@@ -87,7 +87,7 @@ class Player {
         if (this.onLadder === 0) {
             for (let i = 0; i < platforms.length; i++) {
                 if (this.position.y + this.height + this.velocity.y >= platforms[i][0] && this.position.y + this.height + this.velocity.y <= platforms[i][1]) {
-                    if (platforms[i][2] === 85 && this.position.x + this.width >= 85 || platforms[i][2] === 362 && this.position.x <= 362 || platforms[i][2] === 1000) {
+                    if ((platforms[i][2] === 85 && this.position.x + this.width >= 85) || (platforms[i][2] === 225 && this.position.x + this.width >= 225) || (platforms[i][2] === 362 && this.position.x <= 362) || platforms[i][2] === 1000) {
                         this.velocity.y = 0;
                         this.isJumping = false;
                         this.onPlatform = true;
