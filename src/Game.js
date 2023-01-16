@@ -25,28 +25,13 @@ levelSuccessful.src = "images/levelSuccessful.jpeg";
 const goodbye = new Image(); //goodbye screen
 goodbye.src = "images/goodbye.jpeg";
 
-const jump = new Audio("jump.wav");
+const jump = new Audio("audio/jump.wav");
 
-const button = new Audio("button.wav");
+const button = new Audio("audio/button.wav");
+
+highScore = localStorage.getItem("highScore");
 
 //functions
-function getCookie(highScore) {
-    var name = highScore + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-}
-
-highScore = getCookie("highScore");
-
 function reset() {
     //player
     player.reset();
@@ -84,6 +69,10 @@ canvas.addEventListener("click", function (event) {  //start menu buttons
         if (event.offsetX > 164 && event.offsetX < 281 && event.offsetY > 393 && event.offsetY < 457) {
             button.play();
             screen = "goodbye";
+        } else if (event.offsetX > 164 && event.offsetX < 282 && event.offsetY > 466 && event.offsetY < 518) {
+            button.play();
+            screen = "game";
+            reset();
         }
     }
     console.log(event.offsetX, event.offsetY);
@@ -139,16 +128,12 @@ function drawGameOver() {
 function drawWin() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(levelSuccessful, 0, 0, canvas.width, canvas.height);
-
-    highScore = getCookie("highScore");
     if (score > highScore || highScore === undefined) {
         highScore = score;
         alert("New High Score!");
-        var d = new Date();
-        d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d.toUTCString();
-        document.cookie = "highScore=" + highScore + ";" + expires + ";path=/";
+        localStorage.setItem("highScore", highScore);
     }
+
 }
 
 function drawGoodbye() {

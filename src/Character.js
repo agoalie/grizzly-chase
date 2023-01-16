@@ -5,7 +5,8 @@ const platforms = [
     [315, 325, 85],
     [405, 415, 362],
     [495, 505, 1000],
-    [562, 572, 1000]
+    [562, 572, 1000],
+    [91, 101, 1000]
 ];
 const ladders = [
     [273, 498, 289, 559], //bottom 61
@@ -17,7 +18,7 @@ const ladders = [
     [163, 470.2, 179, 493], //broken ladders
     [319, 382, 335, 403],
     [254, 207, 270, 232],
-    [252, 90, 268, 158] //win
+    [252, 92, 268, 156] //win
 ];
 
 class Player {
@@ -111,8 +112,8 @@ class Player {
         this.collisions();
         this.gravity();
 
-        if (this.position.y + this.height < 98) {
-            freeze(2);
+        if (this.position.y + this.height < 98 && this.position.x + this.width > 295) {
+            freeze(1);
             screen = "gameWon";
         }
     }
