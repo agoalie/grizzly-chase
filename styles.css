@@ -1,7 +1,13 @@
+@font-face {
+    font-family: Chalkduster;
+    src: url('Chalkduster.ttf');
+    font-style: normal;
+}
+
 h1 {
     color: lightgray;
     text-align: center;
-    font-family: "Chalkduster";
+    font-family: Chalkduster, serif;
 }
 
 #gameCanvas {
@@ -23,6 +29,6 @@ body {
 h2 {
     color: lightgray;
     text-align: center;
-    font-family: "Chalkduster";
+    font-family: Chalkduster, serif;
     font-size: 18px;
 }

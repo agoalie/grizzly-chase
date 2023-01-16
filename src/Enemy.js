@@ -52,7 +52,6 @@ class Enemy {
             && player.onLadder === 0 && this.scoreCooldown === 0 && player.isJumping === true) {
             score += 20;
             this.scoreCooldown = 9;
-            console.log(score);
         }
         if (this.scoreCooldown !== 0) this.scoreCooldown -= 1;
 
@@ -123,6 +122,12 @@ function spawnEnemy() {
         enemies.push(new Enemy());
         if (min > 1500) min -= 150;
         if (max > 2000) max -= 250;
+    }
+
+    for (let i = 0; i < enemies.length; i++) {
+        if (enemies[i].position.x < -20 && enemies[i].position.y > -467) {
+            enemies.splice(i, 1);
+        }
     }
 }
 
