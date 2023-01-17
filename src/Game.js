@@ -8,7 +8,7 @@ let highScore = 0;
 
 //Images and sounds
 const gameMap = new Image(); //game map image
-gameMap.src = "images/gameMap copy.png";
+gameMap.src = "images/gameMap.png";
 
 const bearIMG = new Image(); //bear image
 bearIMG.src = 'images/bear.png';
