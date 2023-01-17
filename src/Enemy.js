@@ -38,10 +38,8 @@ class Enemy {
         this.position.y = this.position.y + (-this.intensity * Math.sin(1 / 20 * this.position.x) * this.direction);
 
         if (this.position.x < 40 || this.position.x > 410) {
-            //this.position.x = 500;
             if (this.position.y <= 467 || this.position.x >= 410)
                 this.direction = this.direction * -1;
-            //this.position.y = 385;
         }
     }
 

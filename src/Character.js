@@ -44,6 +44,14 @@ class Player {
         this.onPlatform = false
     }
 
+    draw() {
+        if (this.velocity.x > 0)
+            this.image.src = 'images/bunnyR.png';
+        else if (this.velocity.x < 0)
+            this.image.src = 'images/bunnyL.png';
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+    }
+
     ladder(x, y, w, h) {
         if (this.position.x + this.width / 2 >= x && this.position.x + this.width / 2 <= w
             && this.position.y + this.height + this.velocity.y <= h && this.position.y + this.height + this.velocity.y >= y
@@ -58,14 +66,6 @@ class Player {
             this.onLadder = 2;
             return true;
         } else return false;
-    }
-
-    draw() {
-        if (this.velocity.x > 0)
-            this.image.src = 'images/bunnyR.png';
-        else if (this.velocity.x < 0)
-            this.image.src = 'images/bunnyL.png';
-        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
     }
 
     collisions() {
@@ -123,27 +123,27 @@ const player = new Player(); //making instance of player class
 
 //event listeners
 window.addEventListener("keydown", function (event) { //player left/right movement
-    if (event.key === 'ArrowLeft' && player.onLadder !== 1) { //left
+    if ((event.key === 'ArrowLeft' || event.key === 'a') && player.onLadder !== 1) { //left
         player.velocity.x = -2;
     }
-    if (event.key === 'ArrowRight' && player.onLadder !== 1) { //right
+    if ((event.key === 'ArrowRight' || event.key === 'd') && player.onLadder !== 1) { //right
         player.velocity.x = 2;
     }
 
-    if (event.key === 'ArrowUp' && player.onLadder === 1) { //up ladder
+    if ((event.key === 'ArrowUp' || event.key === 'w') && player.onLadder === 1) { //up ladder
         player.position.y -= 8;
-    } else if (event.key === 'ArrowUp' && player.isJumping === false) { //jump
+    } else if ((event.key === 'ArrowUp' || event.key === 'w') && player.isJumping === false) { //jump
         player.velocity.y = -3.8;
         player.isJumping = true;
         jump.play();
     }
 
-    if (event.key === 'ArrowDown' && player.onLadder > 0) { //down ladder
+    if ((event.key === 'ArrowDown' || event.key === 's') && player.onLadder > 0) { //down ladder
         player.position.y += 8;
     }
 });
 
 window.addEventListener("keyup", function (event) { //stop moving when key is released
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight')
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight' || event.key === 'a' || event.key === 'd')
         player.velocity.x = 0;
 });
