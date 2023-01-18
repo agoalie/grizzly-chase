@@ -25,16 +25,19 @@ levelSuccessful.src = "images/levelSuccessful.jpeg";
 const goodbye = new Image(); //goodbye screen
 goodbye.src = "images/goodbye.jpeg";
 
-const jump = new Audio("audio/jump.wav");
+const jump = new Audio("audio/jump.wav"); //jump sound effect
 
-const button = new Audio("audio/button.wav");
+const button = new Audio("audio/button.wav"); //button sound effect
 
 highScore = localStorage.getItem("highScore");
 
 //functions
-if (highScore === null) highScore = 0;
+function freeze(secs) { //freezes the screen for a set amount of time
+    const waitUntil = performance.now() + secs * 1000;
+    while (performance.now() < waitUntil) ;
+}
 
-function reset() {
+function reset() { //resets the game
     //player
     player.reset();
 
@@ -77,16 +80,15 @@ canvas.addEventListener("click", function (event) {  //start menu buttons
             reset();
         }
     }
-    console.log(event.offsetX, event.offsetY);
 });
 
 //Game Loop
-function startGame() {
+function gameLoop() {
     if (animate === true) draw();
-    requestAnimationFrame(startGame);
+    requestAnimationFrame(gameLoop);
 }
 
-function draw() {
+function draw() { //controls which screen is being shown
     if (screen === "menu") {
         drawMenu();
         document.getElementById("scoreBoard").innerHTML = "High score: " + highScore;
@@ -102,15 +104,15 @@ function draw() {
         drawGoodbye();
 }
 
-startGame();
+gameLoop();
 
 //draw screens functions
-function drawMenu() {
+function drawMenu() { //main menu
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(grizzlyStart, 0, 0, canvas.width, canvas.height);
 }
 
-function drawGame() {
+function drawGame() { //runs the game (draw background, update play, and enemy)
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(gameMap, 0, 0, canvas.width, canvas.height);
     ctx.drawImage(bearIMG, 340, 100, 80, 60);
@@ -122,12 +124,12 @@ function drawGame() {
     beeUpdater();
 }
 
-function drawGameOver() {
+function drawGameOver() { //draws game over screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(levelFailed, 0, 0, canvas.width, canvas.height);
 }
 
-function drawWin() {
+function drawWin() { //draws win screen and updates high score if needed
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(levelSuccessful, 0, 0, canvas.width, canvas.height);
     if (score > highScore || highScore === undefined) {
@@ -138,7 +140,7 @@ function drawWin() {
 
 }
 
-function drawGoodbye() {
+function drawGoodbye() { //draws ending screen
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(goodbye, 0, 0, canvas.width, canvas.height);
 }

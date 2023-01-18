@@ -100,11 +100,6 @@ class Enemy {
     }
 }
 
-function freeze(secs) {
-    const waitUntil = performance.now() + secs * 1000;
-    while (performance.now() < waitUntil) ;
-}
-
 function beeUpdater() {
     for (let i = 0; i < enemies.length; i++) { //update bee
         enemies[i].update();
@@ -115,13 +110,13 @@ function beeUpdater() {
 let enemies = [];
 enemies.push(new Enemy());
 
-function spawnEnemy() {
+function spawnEnemy() { // spawns enemies
     if (screen === 'game') {
         enemies.push(new Enemy());
         if (min > 1500) min -= 150;
         if (max > 2000) max -= 250;
     }
-
+    //removes enemies that are no longer onscreen
     for (let i = 0; i < enemies.length; i++) {
         if (enemies[i].position.x < -20 && enemies[i].position.y > -467) {
             enemies.splice(i, 1);
@@ -129,7 +124,7 @@ function spawnEnemy() {
     }
 }
 
-(function loop() {
+(function loop() { // loops enemy spawning at random interval
     let rand = Math.round(Math.random() * (max - min)) + min;
     setTimeout(function () {
         spawnEnemy();
