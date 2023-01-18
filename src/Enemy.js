@@ -7,8 +7,8 @@ class Enemy {
             x: 280,
             y: 134
         }
-        this.width = 20;
-        this.height = 20;
+        this.width = 21;
+        this.height = 21;
         this.image = new Image();
         this.image.src = 'images/beeL.png';
         this.direction = 1;
