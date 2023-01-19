@@ -29,6 +29,10 @@ const jump = new Audio("audio/jump.wav"); //jump sound effect
 
 const button = new Audio("audio/button.wav"); //button sound effect
 
+const loseSound = new Audio("audio/gameLoss.wav"); //game loss sound effect
+
+const winSound = new Audio("audio/gameWin.wav");
+
 highScore = localStorage.getItem("highScore");
 
 //functions

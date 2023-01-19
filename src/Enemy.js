@@ -94,6 +94,7 @@ class Enemy {
         this.movement();
         if (this.collision()) {
             score = 0;
+            loseSound.play();
             freeze(1);
             screen = 'gameOver';
         }

@@ -114,6 +114,7 @@ class Player {
         this.gravity();
 
         if (this.position.y + this.height < 98 && this.position.x + this.width > 295) {
+            winSound.play();
             freeze(1);
             screen = "gameWon";
         }
